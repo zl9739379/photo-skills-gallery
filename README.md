@@ -20,4 +20,4 @@
 
 ## 本地预览
 
-用浏览器直接打开 `photo_skills_gallery.html` 即可。
+用浏览器直接打开 `index.html` 即可。在线访问：https://zl9739379.github.io/photo-skills-gallery/
