@@ -191,6 +191,38 @@
       .meta { text-align: left; }
       .source a { display: inline-block; }
     }
+
+    /* ===== 点击放大（lightbox） ===== */
+    .item img, .hero img { cursor: zoom-in; }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,20,30,.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 5vw, 4rem);
+      z-index: 9999;
+      cursor: zoom-out;
+      -webkit-backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 94vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.5);
+      cursor: default;
+      animation: lbIn .2s ease both;
+    }
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(.96); }
+      to   { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 <body>
@@ -287,5 +319,49 @@
 
     </div>
   </main>
+
+  <!-- 点击放大层 -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <img id="lightbox-img" src="" alt="放大预览">
+  </div>
+
+  <script>
+  (function () {
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lightbox-img');
+
+    function open(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // 所有展示图片可点击放大（含原图）
+    document.querySelectorAll('.item img, .hero img').forEach(function (img) {
+      img.addEventListener('click', function (e) {
+        e.stopPropagation();
+        open(img.getAttribute('src'), img.getAttribute('alt'));
+      });
+    });
+
+    // 点击放大后的图片本身：不关闭（它是“放大区域”）
+    lbImg.addEventListener('click', function (e) { e.stopPropagation(); });
+
+    // 点击放大层中的非图片区域：关闭
+    lb.addEventListener('click', function () { close(); });
+
+    // 按 Esc 也可关闭
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('open')) close();
+    });
+  })();
+  </script>
 </body>
 </html>
