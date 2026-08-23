@@ -177,6 +177,29 @@
     .badge-solo { background: #ddf4ff; color: #0969da; }
     .badge-stitch { background: #fff2cc; color: #7a5c00; }
 
+    /* 中英双语：英文翻译小一号、灰色，写在下一行 */
+    .en {
+      display: block;
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: .35em;
+    }
+    h1 .en {
+      font-size: .52em;
+      font-weight: 500;
+      letter-spacing: .04em;
+      margin-top: .4rem;
+    }
+    .note-en { text-align: center; margin: .55rem 0 0; }
+    .badge-en {
+      display: block;
+      font-size: .85em;
+      font-weight: 400;
+      margin-top: .25rem;
+      opacity: .9;
+    }
+
     /* 平板：缩小缩略列 */
     @media (max-width: 720px) {
       .item { grid-template-columns: 150px 1fr; }
@@ -227,16 +250,17 @@
 </head>
 <body>
   <header>
-    <h1>照片技能展示</h1>
+    <h1>照片技能展示<span class="en">Photo Skills Gallery</span></h1>
     <p class="note">使用 OpenAI 的 gpt-image-2 模型处理</p>
+    <p class="en note-en">Processed with OpenAI's gpt-image-2 model</p>
     <div class="hero">
       <img src="20230705203743.jpg" alt="原图：成都美年广场玻璃幕墙建筑群" loading="eager">
-      <div class="hero-cap">原图（基准比例 16:9）：成都美年广场</div>
+      <div class="hero-cap">原图（基准比例 16:9）：成都美年广场<span class="en">Original (baseline 16:9): Chengdu Meinian Plaza</span></div>
     </div>
   </header>
 
   <main>
-    <p class="intro">本页将<b>同一张照片</b>分别交由资料库「照片空间」中的 <b>7 个 AI 照片处理技能</b>处理，全部使用 OpenAI <b>gpt-image-2</b> 模型生成。每个技能输出一张独立结果图，并标注其 GitHub 出处与大致表现，方便横向对比不同风格化的效果。</p>
+    <p class="intro">本页将<b>同一张照片</b>分别交由资料库「照片空间」中的 <b>7 个 AI 照片处理技能</b>处理，全部使用 OpenAI <b>gpt-image-2</b> 模型生成。每个技能输出一张独立结果图，并标注其 GitHub 出处与大致表现，方便横向对比不同风格化的效果。<span class="en">This page runs the same photo through 7 AI photo-processing skills from the library's "Photo Space", all generated with OpenAI's gpt-image-2 model. Each skill outputs a standalone result image, annotated with its GitHub source and a brief description, for side-by-side comparison of different stylizations.</span></p>
 
     <div class="list">
 
@@ -247,7 +271,8 @@
           <h2>photo-abstract-editorial</h2>
           <p class="source">出处：<a href="https://github.com/ZzzLc0405/photo-abstract-editorial" target="_blank" rel="noopener">ZzzLc0405/photo-abstract-editorial</a></p>
           <p class="desc">将现代建筑玻璃幕墙的节奏抽象为象牙色编辑面板，蓝色玻璃碎片与赭红结构线交错，呈现高端杂志版式感。</p>
-          <span class="badge badge-stitch">原技能含拼接，本次仅输出抽象面板</span>
+          <p class="en">Abstracts the rhythm of the modern glass-curtain-wall building into an ivory editorial panel, where blue glass shards intersect with ochre-red structural lines, evoking a high-end magazine layout.</p>
+          <span class="badge badge-stitch">原技能含拼接，本次仅输出抽象面板<span class="badge-en">Original skill stitches the source; this run outputs the panel only</span></span>
         </div>
       </article>
 
@@ -258,7 +283,8 @@
           <h2>Compose Photo Memory Archive</h2>
           <p class="source">出处：<a href="https://github.com/sbj61188-lab/compose-photo-memory-archive" target="_blank" rel="noopener">sbj61188-lab/compose-photo-memory-archive</a></p>
           <p class="desc">以原图为锚点生成水彩记忆场：蓝色塔楼溶解成流动水渍，赭红结构化为暖色条纹，前景绿意向上晕染，营造怀旧梦境。</p>
-          <span class="badge badge-stitch">原技能含拼接，本次仅输出水彩记忆场</span>
+          <p class="en">Generates a watercolor memory field anchored on the source photo: the blue tower dissolves into flowing stains, ochre-red structures turn into warm stripes, and foreground greenery washes upward, creating a nostalgic dreamscape.</p>
+          <span class="badge badge-stitch">原技能含拼接，本次仅输出水彩记忆场<span class="badge-en">Original stitches the source; this run outputs the watercolor field only</span></span>
         </div>
       </article>
 
@@ -269,7 +295,8 @@
           <h2>Scene Distillation Zine v1.3</h2>
           <p class="source">出处：<a href="https://github.com/Zeejay0/gathered-scenes-zine-skill" target="_blank" rel="noopener">Zeejay0/gathered-scenes-zine-skill</a></p>
           <p class="desc">影像蒸馏：把城市场景蒸馏为 Risograph 风格的独立插画海报，扁平色块、印刷纹理与中文刊头，呈现都市切片感。</p>
-          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
+          <p class="en">Scene distillation: distills the urban scene into a Risograph-style standalone illustration poster with flat color blocks, print texture, and a Chinese masthead, conveying a slice-of-city feel.</p>
+          <span class="badge badge-solo">本身独立输出，未拼接原图<span class="badge-en">Outputs standalone, no source stitching</span></span>
         </div>
       </article>
 
@@ -280,7 +307,8 @@
           <h2>Gathered Scenes Zine v1.3</h2>
           <p class="source">出处：<a href="https://github.com/Zeejay0/gathered-scenes-zine-skill" target="_blank" rel="noopener">Zeejay0/gathered-scenes-zine-skill</a></p>
           <p class="desc">拾景纸刊：用撕纸拼贴手法重构城市广场，粗糙毛边、层叠哑光纸面与行人剪影，带有手工 Zine 的触感。</p>
-          <span class="badge badge-stitch">原技能含拼接，本次仅输出撕纸插画</span>
+          <p class="en">Gathered scenes zine: reconstructs the city plaza with torn-paper collage, rough deckled edges, layered matte paper, and pedestrian silhouettes, carrying a handmade zine tactility.</p>
+          <span class="badge badge-stitch">原技能含拼接，本次仅输出撕纸插画<span class="badge-en">Original stitches the source; this run outputs the torn-paper illustration only</span></span>
         </div>
       </article>
 
@@ -291,7 +319,8 @@
           <h2>gc-minimal-zine-poster</h2>
           <p class="source">出处：<a href="https://github.com/LiamGvchi/gc-minimal-zine-poster" target="_blank" rel="noopener">LiamGvchi/gc-minimal-zine-poster</a></p>
           <p class="desc">极简 Zine 海报：以几何块面重新演绎塔楼广场，粉蓝、锈红与米白构成诗意留白，排版干净、印刷感强。</p>
-          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
+          <p class="en">Minimal zine poster: reimagines the tower plaza with geometric planes, where powder blue, rust red, and off-white form poetic negative space, with clean typography and a strong print feel.</p>
+          <span class="badge badge-solo">本身独立输出，未拼接原图<span class="badge-en">Outputs standalone, no source stitching</span></span>
         </div>
       </article>
 
@@ -302,7 +331,8 @@
           <h2>8bit-pixel-fusion</h2>
           <p class="source">出处：<a href="https://github.com/TwentyfiveBTea/8bit-pixel-art" target="_blank" rel="noopener">TwentyfiveBTea/8bit-pixel-art</a></p>
           <p class="desc">稀疏 8-bit 像素抽象：用有限色块还原玻璃幕墙建筑群，红蓝对比、底部绿树精灵，呈现复古游戏像素美学。</p>
-          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
+          <p class="en">Sparse 8-bit pixel abstraction: reconstructs the glass-curtain-wall complex with a limited palette, red-blue contrast and tree sprites at the base, presenting a retro game pixel aesthetic.</p>
+          <span class="badge badge-solo">本身独立输出，未拼接原图<span class="badge-en">Outputs standalone, no source stitching</span></span>
         </div>
       </article>
 
@@ -313,7 +343,8 @@
           <h2>Photo Ink Echo</h2>
           <p class="source">出处：<a href="https://github.com/zhouaria28-cloud/photo-ink-echo" target="_blank" rel="noopener">zhouaria28-cloud/photo-ink-echo</a></p>
           <p class="desc">水墨回声：以中国画水墨晕染表现现代广场，靛蓝塔影、暖橙结构线、朦胧绿树与宣纸纹理，静谧而诗意。</p>
-          <span class="badge badge-stitch">原技能含拼接，本次仅输出水墨母题面板</span>
+          <p class="en">Photo ink echo: renders the modern plaza in Chinese ink-wash, with indigo tower shadows, warm-orange structural lines, hazy greenery, and rice-paper texture — serene and poetic.</p>
+          <span class="badge badge-stitch">原技能含拼接，本次仅输出水墨母题面板<span class="badge-en">Original stitches the source; this run outputs the ink motif panel only</span></span>
         </div>
       </article>
 
