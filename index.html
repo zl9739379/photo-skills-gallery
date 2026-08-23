@@ -275,6 +275,19 @@
       .source a { display: inline-block; }
     }
 
+    /* 页脚致谢：低存在感配色 */
+    .thanks {
+      max-width: 780px;
+      margin: clamp(2rem, 5vw, 3rem) auto 0;
+      padding: 1.4rem 1rem 2.2rem;
+      text-align: center;
+      font-size: .82rem;
+      color: #8b949e;
+      border-top: 1px solid var(--border);
+    }
+    .thanks p { margin: .35rem 0; line-height: 1.7; }
+    .thanks .en { font-size: .78rem; color: #a3abb3; }
+
     /* ===== 点击放大（lightbox） ===== */
     .item img, .hero img { cursor: zoom-in; }
     .lightbox {
@@ -420,6 +433,11 @@
 
     </div>
   </main>
+
+  <footer class="thanks">
+    <p>本页成果，由多方合力而成：感谢各技能的创作者（ZzzLc0405、sbj61188-lab、Zeejay0、LiamGvchi、TwentyfiveBTea、zhouaria28-cloud）贡献的精彩能力；感谢 OpenAI 的 gpt-image-2 图像模型提供生成力；亦感谢腾讯混元 3 协助编写处理脚本与搭建本网页。</p>
+    <p class="en">This page is the result of combined efforts: thanks to the creators of the skills, to OpenAI's gpt-image-2 image model, and to Tencent Hunyuan 3 for helping write the scripts and build this page.</p>
+  </footer>
 
   <!-- 点击放大层 -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
