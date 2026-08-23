@@ -46,7 +46,7 @@
       border-radius: 999px;
     }
     .hero {
-      max-width: 220px;
+      max-width: 360px;
       margin: 1.4rem auto 0;
       border-radius: 10px;
       overflow: hidden;
@@ -85,7 +85,7 @@
 
     .skill-item {
       display: grid;
-      grid-template-columns: 200px 1fr;
+      grid-template-columns: 320px 1fr;
       gap: clamp(.9rem, 2.5vw, 1.6rem);
       align-items: center;
       background: var(--surface);
@@ -101,7 +101,7 @@
     }
     .skill-item img {
       width: 100%;
-      aspect-ratio: 2/3;
+      aspect-ratio: 16 / 9;
       object-fit: cover;
       border-radius: 10px;
       background: #eef1f4;
@@ -151,7 +151,7 @@
 
     /* 平板：缩小缩略列 */
     @media (max-width: 720px) {
-      .skill-item { grid-template-columns: 150px 1fr; }
+      .skill-item { grid-template-columns: 260px 1fr; }
     }
     /* 手机：图片在上，文字在下 */
     @media (max-width: 520px) {
@@ -159,7 +159,7 @@
         grid-template-columns: 1fr;
         text-align: center;
       }
-      .skill-item img { max-width: 260px; margin: 0 auto; }
+      .skill-item img { max-width: 100%; margin: 0 auto; }
       .meta { text-align: left; }
       .source a { display: inline-block; }
     }
