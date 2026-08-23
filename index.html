@@ -6,7 +6,7 @@
   <title>照片技能展示</title>
   <style>
     :root {
-      --bg: #f6f7f9;
+      --bg: #eef1f6;
       --surface: #ffffff;
       --text: #1f2328;
       --muted: #57606a;
@@ -19,19 +19,20 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      background: var(--bg);
+      background: radial-gradient(circle at 50% -10%, #f7f9fc 0%, #e7ebf2 60%, #dde3ec 100%);
       color: var(--text);
       line-height: 1.6;
+      min-height: 100vh;
     }
 
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: clamp(1.5rem, 4vw, 2.75rem) 1rem;
+      padding: clamp(1.4rem, 4vw, 2.5rem) 1rem;
       text-align: center;
     }
     header h1 {
-      margin: 0 0 .65rem;
+      margin: 0 0 .5rem;
       font-size: clamp(1.5rem, 4vw, 2.1rem);
       letter-spacing: .02em;
     }
@@ -46,60 +47,137 @@
       border-radius: 999px;
     }
     .hero {
-      max-width: 360px;
-      margin: 1.4rem auto 0;
+      max-width: 300px;
+      margin: 1.2rem auto 0;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: 0 2px 10px rgba(0,0,0,.06);
     }
     .hero img { width: 100%; height: auto; display: block; }
-    .hero-cap { font-size: .78rem; color: var(--muted); margin-top: .55rem; }
+    .hero-cap { font-size: .78rem; color: var(--muted); margin-top: .5rem; }
 
     main {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: clamp(1.25rem, 3vw, 2.5rem) 1rem;
+      padding: clamp(1.5rem, 4vw, 3rem) 1rem 4rem;
     }
 
-    .section-title {
-      margin: 0 0 1.25rem;
-      font-size: clamp(1.1rem, 3vw, 1.4rem);
-      font-weight: 700;
-    }
-    .section-title small {
-      display: block;
-      font-weight: 400;
-      font-size: .82rem;
+    .tip {
+      text-align: center;
       color: var(--muted);
-      margin-top: .25rem;
+      font-size: .9rem;
+      margin: 0 0 1.6rem;
+    }
+    .tip b { color: var(--accent); }
+
+    /* ===== 扑克牌扇形叠放区 ===== */
+    .stage {
+      display: grid;
+      grid-template-columns: 1fr minmax(340px, 440px);
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: start;
     }
 
-    .skill-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 1.25rem;
+    .deck {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: nowrap;
+      padding: 70px 30px 30px;
+      overflow-x: auto;
+      perspective: 1400px;
     }
 
-    .skill-item {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: clamp(.9rem, 2.5vw, 1.6rem);
-      align-items: center;
+    .card {
+      position: relative;
+      flex: 0 0 auto;
+      width: clamp(150px, 17vw, 215px);
+      margin-left: clamp(-46px, -4vw, -30px);
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: clamp(1rem, 2.5vw, 1.5rem);
-      box-shadow: 0 1px 4px rgba(0,0,0,.04);
-      transition: box-shadow .15s ease, transform .15s ease;
+      border-radius: 12px;
+      padding: 8px 8px 10px;
+      box-shadow: 0 6px 16px rgba(20,30,50,.18);
+      cursor: pointer;
+      transform-origin: bottom center;
+      transform: rotate(calc((var(--i) - 3) * 4deg)) translateY(calc((var(--i) - 3) * -3px));
+      transition: transform .28s cubic-bezier(.2,.8,.25,1), box-shadow .28s, margin .28s, z-index 0s;
+      z-index: calc(var(--i) + 1);
     }
-    .skill-item:hover {
-      box-shadow: 0 6px 18px rgba(0,0,0,.08);
-      transform: translateY(-2px);
+    .card:first-child { margin-left: 0; }
+    .card:hover, .card:focus-visible {
+      transform: translateY(-34px) rotate(0deg) scale(1.14);
+      box-shadow: 0 18px 34px rgba(20,30,50,.32);
+      z-index: 50;
+      outline: none;
     }
-    .skill-item img {
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 7px;
+      display: block;
+      background: #eef1f4;
+    }
+    .card .idx {
+      position: absolute;
+      top: 4px; left: 4px;
+      width: 26px; height: 26px;
+      border-radius: 7px;
+      background: rgba(31,35,40,.82);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    }
+    .card .tag {
+      position: absolute;
+      bottom: 4px; right: 4px;
+      max-width: 80%;
+      font-size: .62rem;
+      color: #fff;
+      background: rgba(255,107,53,.92);
+      padding: .12rem .4rem;
+      border-radius: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ===== 右侧详情框（悬停滑出） ===== */
+    .detail {
+      position: sticky;
+      top: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(1.1rem, 2.5vw, 1.6rem);
+      min-height: 320px;
+      box-shadow: 0 10px 30px rgba(20,30,50,.10);
+    }
+    .detail-empty {
+      height: 300px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      font-size: .95rem;
+      padding: 1rem;
+    }
+    .detail-content { display: none; }
+    .detail-content.show {
+      display: block;
+      animation: popIn .26s ease both;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: translateX(26px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .detail-content img {
       width: 100%;
       aspect-ratio: 16 / 9;
       object-fit: cover;
@@ -107,8 +185,6 @@
       background: #eef1f4;
       display: block;
     }
-
-    .meta { min-width: 0; }
     .row-id {
       display: inline-block;
       font-size: .72rem;
@@ -117,51 +193,40 @@
       border: 1px solid var(--accent);
       border-radius: 999px;
       padding: .1rem .55rem;
-      margin-bottom: .5rem;
+      margin-bottom: .55rem;
     }
-    .meta h2 {
-      margin: 0 0 .35rem;
-      font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+    .detail-content h2 {
+      margin: 0 0 .4rem;
+      font-size: clamp(1.1rem, 2.6vw, 1.35rem);
     }
     .source {
       font-size: .82rem;
       color: var(--muted);
-      margin: 0 0 .6rem;
+      margin: 0 0 .7rem;
     }
-    .source a {
-      color: var(--link);
-      text-decoration: none;
-      word-break: break-all;
-    }
+    .source a { color: var(--link); text-decoration: none; word-break: break-all; }
     .source a:hover { text-decoration: underline; }
-    .desc {
-      margin: 0;
-      font-size: .95rem;
-      color: var(--text);
-    }
+    .desc { margin: 0; font-size: .96rem; }
     .badge {
       display: inline-block;
       font-size: .7rem;
       padding: .15rem .45rem;
       border-radius: 5px;
-      margin-top: .7rem;
+      margin-top: .8rem;
     }
     .badge-solo { background: #ddf4ff; color: #0969da; }
     .badge-stitch { background: #fff2cc; color: #7a5c00; }
 
-    /* 平板：缩小缩略列 */
-    @media (max-width: 720px) {
-      .skill-item { grid-template-columns: 260px 1fr; }
+    /* ===== 响应式 ===== */
+    @media (max-width: 860px) {
+      .stage { grid-template-columns: 1fr; }
+      .detail { position: static; }
+      .deck { padding-top: 60px; justify-content: flex-start; }
     }
-    /* 手机：图片在上，文字在下 */
     @media (max-width: 520px) {
-      .skill-item {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .skill-item img { max-width: 100%; margin: 0 auto; }
-      .meta { text-align: left; }
-      .source a { display: inline-block; }
+      .card { width: 132px; margin-left: -38px; }
+      .card:hover, .card:focus-visible { transform: translateY(-20px) rotate(0) scale(1.1); }
+      .detail-empty { height: 200px; }
     }
   </style>
 </head>
@@ -171,94 +236,147 @@
     <p class="note">使用 OpenAI 的 gpt-image-2 模型处理</p>
     <div class="hero">
       <img src="20230705203743.jpg" alt="原图：美年广场">
-      <div class="hero-cap">原图：成都美年广场</div>
+      <div class="hero-cap">原图（基准比例 16:9）：成都美年广场</div>
     </div>
   </header>
 
   <main>
-    <h2 class="section-title">
-      全部处理结果
-      <small>资料库「照片」空间 7 个技能 · 每个技能独立输出，不拼接原图</small>
-    </h2>
+    <p class="tip">把照片像<b>扑克牌</b>一样叠在一起 — 悬停任意一张，向右展开的详情框里是它的<b>大图与简介</b>。</p>
 
-    <ul class="skill-list">
-      <li class="skill-item">
-        <img src="results/01_photo-abstract-editorial.png" alt="photo-abstract-editorial">
-        <div class="meta">
-          <span class="row-id">01</span>
-          <h2>photo-abstract-editorial</h2>
-          <p class="source">出处：<a href="https://github.com/ZzzLc0405/photo-abstract-editorial" target="_blank">ZzzLc0405/photo-abstract-editorial</a></p>
-          <p class="desc">将现代建筑玻璃幕墙的节奏抽象为象牙色编辑面板，蓝色玻璃碎片与赭红结构线交错，呈现高端杂志版式感。</p>
-          <span class="badge badge-stitch">原技能含拼接，本次仅输出抽象面板</span>
-        </div>
-      </li>
+    <div class="stage">
+      <div class="deck" id="deck">
+        <figure class="card" tabindex="0" data-id="01" style="--i:0">
+          <span class="idx">01</span>
+          <img src="results/01_photo-abstract-editorial.png" alt="photo-abstract-editorial">
+          <span class="tag">photo-abstract-editorial</span>
+        </figure>
+        <figure class="card" tabindex="0" data-id="02" style="--i:1">
+          <span class="idx">02</span>
+          <img src="results/02_compose-photo-memory-archive.png" alt="Compose Photo Memory Archive">
+          <span class="tag">Compose Memory</span>
+        </figure>
+        <figure class="card" tabindex="0" data-id="03" style="--i:2">
+          <span class="idx">03</span>
+          <img src="results/03_scene-distillation-zine.png" alt="Scene Distillation Zine">
+          <span class="tag">Scene Distillation</span>
+        </figure>
+        <figure class="card" tabindex="0" data-id="04" style="--i:3">
+          <span class="idx">04</span>
+          <img src="results/04_gathered-scenes-zine.png" alt="Gathered Scenes Zine">
+          <span class="tag">Gathered Scenes</span>
+        </figure>
+        <figure class="card" tabindex="0" data-id="05" style="--i:4">
+          <span class="idx">05</span>
+          <img src="results/05_gc-minimal-zine-poster.png" alt="gc-minimal-zine-poster">
+          <span class="tag">gc-minimal</span>
+        </figure>
+        <figure class="card" tabindex="0" data-id="06" style="--i:5">
+          <span class="idx">06</span>
+          <img src="results/06_8bit-pixel-fusion.png" alt="8bit-pixel-fusion">
+          <span class="tag">8bit-pixel-fusion</span>
+        </figure>
+        <figure class="card" tabindex="0" data-id="07" style="--i:6">
+          <span class="idx">07</span>
+          <img src="results/07_photo-ink-echo.png" alt="Photo Ink Echo">
+          <span class="tag">Photo Ink Echo</span>
+        </figure>
+      </div>
 
-      <li class="skill-item">
-        <img src="results/02_compose-photo-memory-archive.png" alt="Compose Photo Memory Archive">
-        <div class="meta">
-          <span class="row-id">02</span>
-          <h2>Compose Photo Memory Archive</h2>
-          <p class="source">出处：<a href="https://github.com/sbj61188-lab/compose-photo-memory-archive" target="_blank">sbj61188-lab/compose-photo-memory-archive</a></p>
-          <p class="desc">以原图为锚点生成水彩记忆场：蓝色塔楼溶解成流动水渍，赭红结构化为暖色条纹，前景绿意向上晕染，营造怀旧梦境。</p>
-          <span class="badge badge-stitch">原技能含拼接，本次仅输出水彩记忆场</span>
-        </div>
-      </li>
-
-      <li class="skill-item">
-        <img src="results/03_scene-distillation-zine.png" alt="Scene Distillation Zine">
-        <div class="meta">
-          <span class="row-id">03</span>
-          <h2>Scene Distillation Zine v1.3</h2>
-          <p class="source">出处：<a href="https://github.com/Zeejay0/gathered-scenes-zine-skill" target="_blank">Zeejay0/gathered-scenes-zine-skill</a></p>
-          <p class="desc">影像蒸馏：把城市场景蒸馏为 Risograph 风格的独立插画海报，扁平色块、印刷纹理与中文刊头，呈现都市切片感。</p>
-          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
-        </div>
-      </li>
-
-      <li class="skill-item">
-        <img src="results/04_gathered-scenes-zine.png" alt="Gathered Scenes Zine">
-        <div class="meta">
-          <span class="row-id">04</span>
-          <h2>Gathered Scenes Zine v1.3</h2>
-          <p class="source">出处：<a href="https://github.com/Zeejay0/gathered-scenes-zine-skill" target="_blank">Zeejay0/gathered-scenes-zine-skill</a></p>
-          <p class="desc">拾景纸刊：用撕纸拼贴手法重构城市广场，粗糙毛边、层叠哑光纸面与行人剪影，带有手工 Zine 的触感。</p>
-          <span class="badge badge-stitch">原技能含拼接，本次仅输出撕纸插画</span>
-        </div>
-      </li>
-
-      <li class="skill-item">
-        <img src="results/05_gc-minimal-zine-poster.png" alt="gc-minimal-zine-poster">
-        <div class="meta">
-          <span class="row-id">05</span>
-          <h2>gc-minimal-zine-poster</h2>
-          <p class="source">出处：<a href="https://github.com/LiamGvchi/gc-minimal-zine-poster" target="_blank">LiamGvchi/gc-minimal-zine-poster</a></p>
-          <p class="desc">极简 Zine 海报：以几何块面重新演绎塔楼广场，粉蓝、锈红与米白构成诗意留白，排版干净、印刷感强。</p>
-          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
-        </div>
-      </li>
-
-      <li class="skill-item">
-        <img src="results/06_8bit-pixel-fusion.png" alt="8bit-pixel-fusion">
-        <div class="meta">
-          <span class="row-id">06</span>
-          <h2>8bit-pixel-fusion</h2>
-          <p class="source">出处：<a href="https://github.com/TwentyfiveBTea/8bit-pixel-art" target="_blank">TwentyfiveBTea/8bit-pixel-art</a></p>
-          <p class="desc">稀疏 8-bit 像素抽象：用有限色块还原玻璃幕墙建筑群，红蓝对比、底部绿树精灵，呈现复古游戏像素美学。</p>
-          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
-        </div>
-      </li>
-
-      <li class="skill-item">
-        <img src="results/07_photo-ink-echo.png" alt="Photo Ink Echo">
-        <div class="meta">
-          <span class="row-id">07</span>
-          <h2>Photo Ink Echo</h2>
-          <p class="source">出处：<a href="https://github.com/zhouaria28-cloud/photo-ink-echo" target="_blank">zhouaria28-cloud/photo-ink-echo</a></p>
-          <p class="desc">水墨回声：以中国画水墨晕染表现现代广场，靛蓝塔影、暖橙结构线、朦胧绿树与宣纸纹理，静谧而诗意。</p>
-          <span class="badge badge-stitch">原技能含拼接，本次仅输出水墨母题面板</span>
-        </div>
-      </li>
-    </ul>
+      <aside class="detail" id="detail">
+        <div class="detail-empty" id="detailEmpty">悬停或点击左侧任意卡片<br>查看该技能的 16:9 大图与简介</div>
+        <div class="detail-content" id="detailContent"></div>
+      </aside>
+    </div>
   </main>
+
+  <script>
+    const DATA = {
+      "01": {
+        name: "photo-abstract-editorial",
+        gh: "ZzzLc0405/photo-abstract-editorial",
+        url: "https://github.com/ZzzLc0405/photo-abstract-editorial",
+        desc: "将现代建筑玻璃幕墙的节奏抽象为象牙色编辑面板，蓝色玻璃碎片与赭红结构线交错，呈现高端杂志版式感。",
+        badge: "stitch", note: "原技能含拼接，本次仅输出抽象面板"
+      },
+      "02": {
+        name: "Compose Photo Memory Archive",
+        gh: "sbj61188-lab/compose-photo-memory-archive",
+        url: "https://github.com/sbj61188-lab/compose-photo-memory-archive",
+        desc: "以原图为锚点生成水彩记忆场：蓝色塔楼溶解成流动水渍，赭红结构化为暖色条纹，前景绿意向上晕染，营造怀旧梦境。",
+        badge: "stitch", note: "原技能含拼接，本次仅输出水彩记忆场"
+      },
+      "03": {
+        name: "Scene Distillation Zine v1.3",
+        gh: "Zeejay0/gathered-scenes-zine-skill",
+        url: "https://github.com/Zeejay0/gathered-scenes-zine-skill",
+        desc: "影像蒸馏：把城市场景蒸馏为 Risograph 风格的独立插画海报，扁平色块、印刷纹理与中文刊头，呈现都市切片感。",
+        badge: "solo", note: "本身独立输出，未拼接原图"
+      },
+      "04": {
+        name: "Gathered Scenes Zine v1.3",
+        gh: "Zeejay0/gathered-scenes-zine-skill",
+        url: "https://github.com/Zeejay0/gathered-scenes-zine-skill",
+        desc: "拾景纸刊：用撕纸拼贴手法重构城市广场，粗糙毛边、层叠哑光纸面与行人剪影，带有手工 Zine 的触感。",
+        badge: "stitch", note: "原技能含拼接，本次仅输出撕纸插画"
+      },
+      "05": {
+        name: "gc-minimal-zine-poster",
+        gh: "LiamGvchi/gc-minimal-zine-poster",
+        url: "https://github.com/LiamGvchi/gc-minimal-zine-poster",
+        desc: "极简 Zine 海报：以几何块面重新演绎塔楼广场，粉蓝、锈红与米白构成诗意留白，排版干净、印刷感强。",
+        badge: "solo", note: "本身独立输出，未拼接原图"
+      },
+      "06": {
+        name: "8bit-pixel-fusion",
+        gh: "TwentyfiveBTea/8bit-pixel-art",
+        url: "https://github.com/TwentyfiveBTea/8bit-pixel-art",
+        desc: "稀疏 8-bit 像素抽象：用有限色块还原玻璃幕墙建筑群，红蓝对比、底部绿树精灵，呈现复古游戏像素美学。",
+        badge: "solo", note: "本身独立输出，未拼接原图"
+      },
+      "07": {
+        name: "Photo Ink Echo",
+        gh: "zhouaria28-cloud/photo-ink-echo",
+        url: "https://github.com/zhouaria28-cloud/photo-ink-echo",
+        desc: "水墨回声：以中国画水墨晕染表现现代广场，靛蓝塔影、暖橙结构线、朦胧绿树与宣纸纹理，静谧而诗意。",
+        badge: "stitch", note: "原技能含拼接，本次仅输出水墨母题面板"
+      }
+    };
+
+    const IMG = {
+      "01": "results/01_photo-abstract-editorial.png",
+      "02": "results/02_compose-photo-memory-archive.png",
+      "03": "results/03_scene-distillation-zine.png",
+      "04": "results/04_gathered-scenes-zine.png",
+      "05": "results/05_gc-minimal-zine-poster.png",
+      "06": "results/06_8bit-pixel-fusion.png",
+      "07": "results/07_photo-ink-echo.png"
+    };
+
+    const emptyEl = document.getElementById("detailEmpty");
+    const contentEl = document.getElementById("detailContent");
+
+    function show(id) {
+      const d = DATA[id];
+      if (!d) return;
+      const badgeClass = d.badge === "stitch" ? "badge-stitch" : "badge-solo";
+      contentEl.innerHTML =
+        '<img src="' + IMG[id] + '" alt="' + d.name + '">' +
+        '<span class="row-id">' + id + '</span>' +
+        '<h2>' + d.name + '</h2>' +
+        '<p class="source">出处：<a href="' + d.url + '" target="_blank" rel="noopener">' + d.gh + '</a></p>' +
+        '<p class="desc">' + d.desc + '</p>' +
+        '<span class="badge ' + badgeClass + '">' + d.note + '</span>';
+      emptyEl.style.display = "none";
+      contentEl.classList.remove("show");
+      void contentEl.offsetWidth; // 重触发动画
+      contentEl.classList.add("show");
+    }
+
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("mouseenter", () => show(card.dataset.id));
+      card.addEventListener("focus", () => show(card.dataset.id));
+      card.addEventListener("click", () => show(card.dataset.id));
+    });
+  </script>
 </body>
 </html>
