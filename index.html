@@ -3,7 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>照片技能展示</title>
+
+  <title>照片技能展示 | 7 个 AI 照片处理技能效果对比</title>
+
+  <!-- 基础 SEO -->
+  <meta name="description" content="用 OpenAI gpt-image-2 模型，将同一张照片经资料库照片空间 7 个 AI 技能（photo-abstract-editorial、Compose Photo Memory Archive、Scene Distillation Zine、Gathered Scenes Zine、gc-minimal-zine-poster、8bit-pixel-fusion、Photo Ink Echo）处理后的效果对比展示。">
+  <meta name="keywords" content="照片技能展示,AI照片处理,gpt-image-2,照片抽象,水彩记忆,像素艺术,极简海报,水墨回声,照片编辑技能">
+  <meta name="author" content="zl9739379">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <link rel="canonical" href="https://zl9739379.github.io/photo-skills-gallery/">
+
+  <!-- Open Graph（社交分享） -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="照片技能展示">
+  <meta property="og:title" content="照片技能展示 | 7 个 AI 照片处理技能效果对比">
+  <meta property="og:description" content="同一张照片经 7 个 AI 照片技能处理后的效果对比，全部使用 OpenAI gpt-image-2 模型生成。">
+  <meta property="og:url" content="https://zl9739379.github.io/photo-skills-gallery/">
+  <meta property="og:image" content="https://zl9739379.github.io/photo-skills-gallery/results/01_photo-abstract-editorial.png">
+  <meta property="og:locale" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="照片技能展示 | 7 个 AI 照片处理技能效果对比">
+  <meta name="twitter:description" content="同一张照片经 7 个 AI 照片技能处理后的效果对比，全部使用 OpenAI gpt-image-2 模型生成。">
+  <meta name="twitter:image" content="https://zl9739379.github.io/photo-skills-gallery/results/01_photo-abstract-editorial.png">
+
+  <!-- 结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "照片技能展示",
+    "description": "用 OpenAI gpt-image-2 模型，将同一张照片经 7 个 AI 照片处理技能处理后的效果对比展示。",
+    "url": "https://zl9739379.github.io/photo-skills-gallery/",
+    "inLanguage": "zh-CN",
+    "hasPart": [
+      {"@type":"CreativeWork","name":"photo-abstract-editorial","url":"https://github.com/ZzzLc0405/photo-abstract-editorial","image":"https://zl9739379.github.io/photo-skills-gallery/results/01_photo-abstract-editorial.png"},
+      {"@type":"CreativeWork","name":"Compose Photo Memory Archive","url":"https://github.com/sbj61188-lab/compose-photo-memory-archive","image":"https://zl9739379.github.io/photo-skills-gallery/results/02_compose-photo-memory-archive.png"},
+      {"@type":"CreativeWork","name":"Scene Distillation Zine v1.3","url":"https://github.com/Zeejay0/gathered-scenes-zine-skill","image":"https://zl9739379.github.io/photo-skills-gallery/results/03_scene-distillation-zine.png"},
+      {"@type":"CreativeWork","name":"Gathered Scenes Zine v1.3","url":"https://github.com/Zeejay0/gathered-scenes-zine-skill","image":"https://zl9739379.github.io/photo-skills-gallery/results/04_gathered-scenes-zine.png"},
+      {"@type":"CreativeWork","name":"gc-minimal-zine-poster","url":"https://github.com/LiamGvchi/gc-minimal-zine-poster","image":"https://zl9739379.github.io/photo-skills-gallery/results/05_gc-minimal-zine-poster.png"},
+      {"@type":"CreativeWork","name":"8bit-pixel-fusion","url":"https://github.com/TwentyfiveBTea/8bit-pixel-art","image":"https://zl9739379.github.io/photo-skills-gallery/results/06_8bit-pixel-fusion.png"},
+      {"@type":"CreativeWork","name":"Photo Ink Echo","url":"https://github.com/zhouaria28-cloud/photo-ink-echo","image":"https://zl9739379.github.io/photo-skills-gallery/results/07_photo-ink-echo.png"}
+    ]
+  }
+  </script>
+
   <style>
     :root {
       --bg: #eef1f6;
@@ -62,6 +109,14 @@
       margin: 0 auto;
       padding: clamp(1.5rem, 4vw, 3rem) 1rem 3rem;
     }
+    .intro {
+      max-width: 760px;
+      margin: 0 auto clamp(1.2rem, 3vw, 2rem);
+      color: var(--muted);
+      font-size: clamp(.92rem, 2.4vw, 1.02rem);
+      text-align: center;
+    }
+    .intro b { color: var(--text); }
 
     .list {
       display: flex;
@@ -143,16 +198,18 @@
     <h1>照片技能展示</h1>
     <p class="note">使用 OpenAI 的 gpt-image-2 模型处理</p>
     <div class="hero">
-      <img src="20230705203743.jpg" alt="原图：美年广场">
+      <img src="20230705203743.jpg" alt="原图：成都美年广场玻璃幕墙建筑群" loading="eager">
       <div class="hero-cap">原图（基准比例 16:9）：成都美年广场</div>
     </div>
   </header>
 
   <main>
+    <p class="intro">本页将<b>同一张照片</b>分别交由资料库「照片空间」中的 <b>7 个 AI 照片处理技能</b>处理，全部使用 OpenAI <b>gpt-image-2</b> 模型生成。每个技能输出一张独立结果图，并标注其 GitHub 出处与大致表现，方便横向对比不同风格化的效果。</p>
+
     <div class="list">
 
       <article class="item">
-        <img src="results/01_photo-abstract-editorial.png" alt="photo-abstract-editorial">
+        <img src="results/01_photo-abstract-editorial.png" alt="photo-abstract-editorial 处理结果" loading="lazy">
         <div class="meta">
           <span class="row-id">01</span>
           <h2>photo-abstract-editorial</h2>
@@ -163,7 +220,7 @@
       </article>
 
       <article class="item">
-        <img src="results/02_compose-photo-memory-archive.png" alt="Compose Photo Memory Archive">
+        <img src="results/02_compose-photo-memory-archive.png" alt="Compose Photo Memory Archive 处理结果" loading="lazy">
         <div class="meta">
           <span class="row-id">02</span>
           <h2>Compose Photo Memory Archive</h2>
@@ -174,7 +231,7 @@
       </article>
 
       <article class="item">
-        <img src="results/03_scene-distillation-zine.png" alt="Scene Distillation Zine">
+        <img src="results/03_scene-distillation-zine.png" alt="Scene Distillation Zine 处理结果" loading="lazy">
         <div class="meta">
           <span class="row-id">03</span>
           <h2>Scene Distillation Zine v1.3</h2>
@@ -185,7 +242,7 @@
       </article>
 
       <article class="item">
-        <img src="results/04_gathered-scenes-zine.png" alt="Gathered Scenes Zine">
+        <img src="results/04_gathered-scenes-zine.png" alt="Gathered Scenes Zine 处理结果" loading="lazy">
         <div class="meta">
           <span class="row-id">04</span>
           <h2>Gathered Scenes Zine v1.3</h2>
@@ -196,7 +253,7 @@
       </article>
 
       <article class="item">
-        <img src="results/05_gc-minimal-zine-poster.png" alt="gc-minimal-zine-poster">
+        <img src="results/05_gc-minimal-zine-poster.png" alt="gc-minimal-zine-poster 处理结果" loading="lazy">
         <div class="meta">
           <span class="row-id">05</span>
           <h2>gc-minimal-zine-poster</h2>
@@ -207,7 +264,7 @@
       </article>
 
       <article class="item">
-        <img src="results/06_8bit-pixel-fusion.png" alt="8bit-pixel-fusion">
+        <img src="results/06_8bit-pixel-fusion.png" alt="8bit-pixel-fusion 处理结果" loading="lazy">
         <div class="meta">
           <span class="row-id">06</span>
           <h2>8bit-pixel-fusion</h2>
@@ -218,7 +275,7 @@
       </article>
 
       <article class="item">
-        <img src="results/07_photo-ink-echo.png" alt="Photo Ink Echo">
+        <img src="results/07_photo-ink-echo.png" alt="Photo Ink Echo 处理结果" loading="lazy">
         <div class="meta">
           <span class="row-id">07</span>
           <h2>Photo Ink Echo</h2>
