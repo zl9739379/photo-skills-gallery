@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>照片技能展示</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --text: #1f2328;
+      --muted: #57606a;
+      --border: #e2e6ea;
+      --link: #0969da;
+      --accent: #ff6b35;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: clamp(1.5rem, 4vw, 2.75rem) 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 .65rem;
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      letter-spacing: .02em;
+    }
+    .note {
+      display: inline-block;
+      margin: 0;
+      padding: .35rem .9rem;
+      font-size: clamp(.8rem, 2.2vw, .95rem);
+      color: var(--accent);
+      background: #fff3ed;
+      border: 1px solid #ffd8c4;
+      border-radius: 999px;
+    }
+    .hero {
+      max-width: 220px;
+      margin: 1.4rem auto 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+    .hero img { width: 100%; height: auto; display: block; }
+    .hero-cap { font-size: .78rem; color: var(--muted); margin-top: .55rem; }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: clamp(1.25rem, 3vw, 2.5rem) 1rem;
+    }
+
+    .section-title {
+      margin: 0 0 1.25rem;
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      font-weight: 700;
+    }
+    .section-title small {
+      display: block;
+      font-weight: 400;
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: .25rem;
+    }
+
+    .skill-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .skill-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: clamp(.9rem, 2.5vw, 1.6rem);
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: clamp(1rem, 2.5vw, 1.5rem);
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+      transition: box-shadow .15s ease, transform .15s ease;
+    }
+    .skill-item:hover {
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+    .skill-item img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #eef1f4;
+      display: block;
+    }
+
+    .meta { min-width: 0; }
+    .row-id {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      padding: .1rem .55rem;
+      margin-bottom: .5rem;
+    }
+    .meta h2 {
+      margin: 0 0 .35rem;
+      font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+    }
+    .source {
+      font-size: .82rem;
+      color: var(--muted);
+      margin: 0 0 .6rem;
+    }
+    .source a {
+      color: var(--link);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .source a:hover { text-decoration: underline; }
+    .desc {
+      margin: 0;
+      font-size: .95rem;
+      color: var(--text);
+    }
+    .badge {
+      display: inline-block;
+      font-size: .7rem;
+      padding: .15rem .45rem;
+      border-radius: 5px;
+      margin-top: .7rem;
+    }
+    .badge-solo { background: #ddf4ff; color: #0969da; }
+    .badge-stitch { background: #fff2cc; color: #7a5c00; }
+
+    /* 平板：缩小缩略列 */
+    @media (max-width: 720px) {
+      .skill-item { grid-template-columns: 150px 1fr; }
+    }
+    /* 手机：图片在上，文字在下 */
+    @media (max-width: 520px) {
+      .skill-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .skill-item img { max-width: 260px; margin: 0 auto; }
+      .meta { text-align: left; }
+      .source a { display: inline-block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>照片技能展示</h1>
+    <p class="note">使用 OpenAI 的 gpt-image-2 模型处理</p>
+    <div class="hero">
+      <img src="20230705203743.jpg" alt="原图：美年广场">
+      <div class="hero-cap">原图：成都美年广场</div>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="section-title">
+      全部处理结果
+      <small>资料库「照片」空间 7 个技能 · 每个技能独立输出，不拼接原图</small>
+    </h2>
+
+    <ul class="skill-list">
+      <li class="skill-item">
+        <img src="results/01_photo-abstract-editorial.png" alt="photo-abstract-editorial">
+        <div class="meta">
+          <span class="row-id">01</span>
+          <h2>photo-abstract-editorial</h2>
+          <p class="source">出处：<a href="https://github.com/ZzzLc0405/photo-abstract-editorial" target="_blank">ZzzLc0405/photo-abstract-editorial</a></p>
+          <p class="desc">将现代建筑玻璃幕墙的节奏抽象为象牙色编辑面板，蓝色玻璃碎片与赭红结构线交错，呈现高端杂志版式感。</p>
+          <span class="badge badge-stitch">原技能含拼接，本次仅输出抽象面板</span>
+        </div>
+      </li>
+
+      <li class="skill-item">
+        <img src="results/02_compose-photo-memory-archive.png" alt="Compose Photo Memory Archive">
+        <div class="meta">
+          <span class="row-id">02</span>
+          <h2>Compose Photo Memory Archive</h2>
+          <p class="source">出处：<a href="https://github.com/sbj61188-lab/compose-photo-memory-archive" target="_blank">sbj61188-lab/compose-photo-memory-archive</a></p>
+          <p class="desc">以原图为锚点生成水彩记忆场：蓝色塔楼溶解成流动水渍，赭红结构化为暖色条纹，前景绿意向上晕染，营造怀旧梦境。</p>
+          <span class="badge badge-stitch">原技能含拼接，本次仅输出水彩记忆场</span>
+        </div>
+      </li>
+
+      <li class="skill-item">
+        <img src="results/03_scene-distillation-zine.png" alt="Scene Distillation Zine">
+        <div class="meta">
+          <span class="row-id">03</span>
+          <h2>Scene Distillation Zine v1.3</h2>
+          <p class="source">出处：<a href="https://github.com/Zeejay0/gathered-scenes-zine-skill" target="_blank">Zeejay0/gathered-scenes-zine-skill</a></p>
+          <p class="desc">影像蒸馏：把城市场景蒸馏为 Risograph 风格的独立插画海报，扁平色块、印刷纹理与中文刊头，呈现都市切片感。</p>
+          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
+        </div>
+      </li>
+
+      <li class="skill-item">
+        <img src="results/04_gathered-scenes-zine.png" alt="Gathered Scenes Zine">
+        <div class="meta">
+          <span class="row-id">04</span>
+          <h2>Gathered Scenes Zine v1.3</h2>
+          <p class="source">出处：<a href="https://github.com/Zeejay0/gathered-scenes-zine-skill" target="_blank">Zeejay0/gathered-scenes-zine-skill</a></p>
+          <p class="desc">拾景纸刊：用撕纸拼贴手法重构城市广场，粗糙毛边、层叠哑光纸面与行人剪影，带有手工 Zine 的触感。</p>
+          <span class="badge badge-stitch">原技能含拼接，本次仅输出撕纸插画</span>
+        </div>
+      </li>
+
+      <li class="skill-item">
+        <img src="results/05_gc-minimal-zine-poster.png" alt="gc-minimal-zine-poster">
+        <div class="meta">
+          <span class="row-id">05</span>
+          <h2>gc-minimal-zine-poster</h2>
+          <p class="source">出处：<a href="https://github.com/LiamGvchi/gc-minimal-zine-poster" target="_blank">LiamGvchi/gc-minimal-zine-poster</a></p>
+          <p class="desc">极简 Zine 海报：以几何块面重新演绎塔楼广场，粉蓝、锈红与米白构成诗意留白，排版干净、印刷感强。</p>
+          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
+        </div>
+      </li>
+
+      <li class="skill-item">
+        <img src="results/06_8bit-pixel-fusion.png" alt="8bit-pixel-fusion">
+        <div class="meta">
+          <span class="row-id">06</span>
+          <h2>8bit-pixel-fusion</h2>
+          <p class="source">出处：<a href="https://github.com/TwentyfiveBTea/8bit-pixel-art" target="_blank">TwentyfiveBTea/8bit-pixel-art</a></p>
+          <p class="desc">稀疏 8-bit 像素抽象：用有限色块还原玻璃幕墙建筑群，红蓝对比、底部绿树精灵，呈现复古游戏像素美学。</p>
+          <span class="badge badge-solo">本身独立输出，未拼接原图</span>
+        </div>
+      </li>
+
+      <li class="skill-item">
+        <img src="results/07_photo-ink-echo.png" alt="Photo Ink Echo">
+        <div class="meta">
+          <span class="row-id">07</span>
+          <h2>Photo Ink Echo</h2>
+          <p class="source">出处：<a href="https://github.com/zhouaria28-cloud/photo-ink-echo" target="_blank">zhouaria28-cloud/photo-ink-echo</a></p>
+          <p class="desc">水墨回声：以中国画水墨晕染表现现代广场，靛蓝塔影、暖橙结构线、朦胧绿树与宣纸纹理，静谧而诗意。</p>
+          <span class="badge badge-stitch">原技能含拼接，本次仅输出水墨母题面板</span>
+        </div>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>

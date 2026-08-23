@@ -1,0 +1,1 @@
+A sparse 8-bit pixel art abstraction of a modern glass tower complex. Limited 8-color palette, blocky blue glass facade, red tower accent, tiny green tree sprites at the bottom, retro game aesthetic, clean pixel grid, minimalist editorial composition, no text, no dithering.
